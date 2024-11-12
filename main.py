@@ -7,7 +7,7 @@ from kivymd.app import MDApp
 from kivymd.uix.filemanager import MDFileManager
 from kivymd.uix.snackbar import MDSnackbar, MDSnackbarText
 
-from widgets import MedicalCard, TitleBar
+from widgets import MedicalCard
 import json
 import shutil
 import os

@@ -2,9 +2,11 @@ from kivy.properties import StringProperty, NumericProperty
 from kivy.lang import Builder
 from kivy.animation import Animation
 from kivy.metrics import dp
+from kivy.uix.behaviors.button import ButtonBehavior
 from kivy.uix.widget import Widget
 
 from kivymd.uix.card import MDCard
+from kivymd.uix.card import MDCardSwipe
 from kivymd.uix.button import MDButton, MDButtonText
 from kivymd.uix.dialog import (
     MDDialog,
@@ -12,10 +14,8 @@ from kivymd.uix.dialog import (
     MDDialogButtonContainer
 )
 
-from widgets.button_extra_behavior import ButtonExtraBehavior
 
-
-class MedicalCard(ButtonExtraBehavior, MDCard):
+class MedicalCard(MDCardSwipe):
     name = StringProperty()
     date = StringProperty()
     status = NumericProperty()
@@ -47,27 +47,9 @@ class MedicalCard(ButtonExtraBehavior, MDCard):
         self.image = image
         self.set_scan()
 
+
     def on_long_press(self, *args):
-        dialog = MDDialog(
-            MDDialogHeadlineText(
-                text="Удалить справку?",
-                halign="left",
-            ),
-            MDDialogButtonContainer(
-                Widget(),
-                MDButton(
-                    MDButtonText(text="Отмена"),
-                    style="text",
-                ),
-                MDButton(
-                    MDButtonText(text="Удалить"),
-                    style="text",
-                ),
-                spacing="8dp",
-            ),
-        )
-        dialog.update_width()
-        dialog.open()
+        pass
 
     def on_release(self, *args) -> None:
         self.narrow() if self.expanded else self.expand()
@@ -92,6 +74,6 @@ class MedicalCard(ButtonExtraBehavior, MDCard):
         :param status: "good" or "bad"
         :return the message of color changing
         '''
-        self.md_bg_color = self.status_variants[status]["rgba"]
+        self.ids.status_line.md_bg_color = self.status_variants[status]["rgba"]
 
         return "The color changed"

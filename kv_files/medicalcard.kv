@@ -1,63 +1,83 @@
-
-
-
 <MedicalCard>
-    orientation: "horizontal"
     size_hint_y: None
     height: "95dp"
-    theme_bg_color: "Custom"
-    md_bg_color: 0.596, 0.835, 0.556, 1
+    anchor: "right"
 
-    MDBoxLayout:
-        size_hint_x: 0.04
+    MDCardSwipeLayerBox:
+        orientation: 'horizontal'
+        padding: "8dp"
+        theme_bg_color: "Custom"
+        md_bg_color: self.theme_cls.backgroundColor
 
-    MDBoxLayout:
-        orientation: "horizontal"
-        md_bg_color: .85, .85, .85, 1
-        radius: ["0dp", root.radius[1], root.radius[2], "0dp"]
+        Widget:
+
+        MDIconButton:
+            icon: "pen"
+            pos_hint: {"right": 1, "center_y": .5}
+
+        MDIconButton:
+            icon: "trash-can"
+            pos_hint: {"right": 1, "center_y": .5}
+
+    MDCardSwipeFrontBox:
+        id: status_line
+        orientation: 'horizontal'
+        theme_bg_color: "Custom"
+        md_bg_color: 0.596, 0.835, 0.556, 1
+        on_release: root.on_release()
 
         MDBoxLayout:
-            orientation: "vertical"
+            size_hint_x: 0.04
+            radius: ["16dp", "0dp", "0dp", "16dp"]
+
+        MDBoxLayout:
+            orientation: "horizontal"
             md_bg_color: .85, .85, .85, 1
-            size_hint_x: 0.7
-            padding: "10dp"
-            spacing: "2dp"
+            radius: ["0dp", "16dp", "16dp", "0dp"]
 
             MDBoxLayout:
                 orientation: "vertical"
-                adaptive_height: True
-
-                MDLabel:
-                    text: root.name
-                    bold: True
-                    adaptive_height: True
-
-                MDLabel:
-                    text: root.date
-                    adaptive_height: True
-
-                MDLabel:
-                    text: root.status_variants[root.status]["verdict"]
-                    adaptive_height: True
-
-            MDScrollView:
-                do_scroll_x: False
+                md_bg_color: .85, .85, .85, 1
+                size_hint_x: 0.7
+                padding: "10dp"
+                spacing: "2dp"
 
                 MDBoxLayout:
                     orientation: "vertical"
                     adaptive_height: True
 
-                    MDBoxLayout:
+                    MDLabel:
+                        text: root.name
+                        bold: True
                         adaptive_height: True
 
-                        MDLabel:
-                            text: "Какое-то описание справки, возможно, полезная информация, возможно, нет. Главное, что это текст! Но он ведь может еще и прокручиться, черт возьми! Как же это удобно!!! Вот они - прелести современных технологий :)"
-                            adaptive_height: True
-                            italic: True
+                    MDLabel:
+                        text: root.date
+                        adaptive_height: True
 
-        MDBoxLayout:
-            size_hint_x: 0.3
-            padding: "10dp"
-            FitImage:
-                source: root.image
-                radius: [root.radius[0] / 2, root.radius[1] / 2, root.radius[2] / 2, root.radius[3] / 2]
+                    MDLabel:
+                        text: root.status_variants[root.status]["verdict"]
+                        adaptive_height: True
+
+                MDScrollView:
+                    do_scroll_x: False
+
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        adaptive_height: True
+
+                        MDBoxLayout:
+                            adaptive_height: True
+
+                            MDLabel:
+                                text: "Какое-то описание справки, возможно, полезная информация, возможно, нет. Главное, что это текст! Но он ведь может еще и прокручиться, черт возьми! Как же это удобно!!! Вот они - прелести современных технологий :)"
+                                adaptive_height: True
+                                italic: True
+
+            MDBoxLayout:
+                radius: ["0dp", "16dp", "16dp", "0dp"]
+                size_hint_x: 0.3
+                padding: "10dp"
+                FitImage:
+                    source: root.image
+                    radius: [root.radius[0] / 2, root.radius[1] / 2, root.radius[2] / 2, root.radius[3] / 2]
